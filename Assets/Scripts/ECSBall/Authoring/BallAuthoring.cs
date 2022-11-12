@@ -12,7 +12,6 @@ public class BallAuthoring : MonoBehaviour
 }
 public class BallBaker : Baker<BallAuthoring>
 {
-
     public override void Bake(BallAuthoring authoring)
     {
         AddComponent(new BallComponent

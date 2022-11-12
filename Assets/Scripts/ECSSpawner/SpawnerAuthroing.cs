@@ -14,6 +14,7 @@ public class SpawnerBaker : Baker<SpawnerAuthoring>
         AddComponent(new SpawnerComponent
         {
             _ballEntity = GetEntity(authoring._ballPrefab),
+            _random = new Unity.Mathematics.Random((uint)Random.Range(int.MinValue, int.MaxValue)),
         });
     }
 }
