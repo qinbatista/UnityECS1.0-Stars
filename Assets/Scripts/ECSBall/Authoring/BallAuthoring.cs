@@ -8,7 +8,6 @@ public class BallAuthoring : MonoBehaviour
     public float3 _position;
     public float3 _acceleration;
     public float3 _direction;
-    public Unity.Mathematics.Random _random;
 }
 public class BallBaker : Baker<BallAuthoring>
 {
@@ -19,7 +18,6 @@ public class BallBaker : Baker<BallAuthoring>
             _position = authoring._position,
             _acceleration = authoring._acceleration,
             _direction = authoring._direction,
-            _random = authoring._random,
         });
         AddComponent(new BallTagComponent
         {

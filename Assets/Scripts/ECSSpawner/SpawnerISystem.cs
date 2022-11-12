@@ -9,7 +9,7 @@ using Unity.Mathematics;
 public partial struct SpawnerISystem : ISystem
 {
     EntityQuery playerEntityQuery;
-    const int quantity = 200000;
+    const int quantity = 800000;
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -32,10 +32,9 @@ public partial struct SpawnerISystem : ISystem
                 entityCommandBuffer.SetComponent(spawnedEntity,
                 new BallComponent
                 {
-                    _position = new float3(spawnerComponent._random.NextFloat(0,15f), spawnerComponent._random.NextFloat(0,15f), spawnerComponent._random.NextFloat(0,15f)),
+                    _position = new float3(spawnerComponent._random.NextFloat(-150,150), spawnerComponent._random.NextFloat(-150,150), spawnerComponent._random.NextFloat(-150,150)),
                     _acceleration = new float3(1, 2, 3),
                     _direction = new float3(spawnerComponent._random.NextFloat(0,15f), spawnerComponent._random.NextFloat(0,15f), spawnerComponent._random.NextFloat(0,15f)),
-                    _random = new Unity.Mathematics.Random(1),
                 });
             }
         }
