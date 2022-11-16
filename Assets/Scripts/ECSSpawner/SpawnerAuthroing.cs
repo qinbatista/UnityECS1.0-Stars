@@ -8,7 +8,7 @@ public class SpawnerAuthoring : MonoBehaviour
     public GameObject _ballPrefab;
     public GameObject _spawnPoint;
     public static bool isStartSpawning = false;
-    public void StartSpawning() { Debug.Log("isStartSpawning=true");isStartSpawning = true; }
+    public void StartSpawning() { Debug.Log("isStartSpawning=true"); isStartSpawning = true; }
 }
 public class SpawnerBaker : Baker<SpawnerAuthoring>
 {

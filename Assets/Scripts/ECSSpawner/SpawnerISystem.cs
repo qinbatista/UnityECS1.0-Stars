@@ -23,13 +23,13 @@ public partial struct SpawnerISystem : ISystem
     public void OnUpdate(ref SystemState state)//work as main thread
     {
         playerEntityQuery = state.GetEntityQuery(typeof(BallTagComponent));
-        if (playerEntityQuery.CalculateEntityCount() != quantity)
+        if (playerEntityQuery.CalculateEntityCount() != Authoring.Instance.total)
         {
             SpawnerComponent spawnerComponent = SystemAPI.GetSingleton<SpawnerComponent>();
-            if (Authoring.isStartSpawning)
+            if (Authoring.isStartSpawning && Authoring.Instance.useECS)
             {
                 EntityCommandBuffer entityCommandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.World.Unmanaged);
-                for (int i = 0; i < quantity; i++)
+                for (int i = 0; i < Authoring.Instance.total; i++)
                 {
                     Entity spawnedEntity = entityCommandBuffer.Instantiate(spawnerComponent._ballEntity);
                     entityCommandBuffer.SetComponent(spawnedEntity,
