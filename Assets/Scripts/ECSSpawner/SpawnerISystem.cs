@@ -1,5 +1,6 @@
 
 
+using System.Diagnostics;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
@@ -9,7 +10,7 @@ using Unity.Mathematics;
 public partial struct SpawnerISystem : ISystem
 {
     EntityQuery playerEntityQuery;
-    const int quantity = 800000;
+    const int quantity = 200000;
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -25,17 +26,20 @@ public partial struct SpawnerISystem : ISystem
         if (playerEntityQuery.CalculateEntityCount() != quantity)
         {
             SpawnerComponent spawnerComponent = SystemAPI.GetSingleton<SpawnerComponent>();
-            EntityCommandBuffer entityCommandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.World.Unmanaged);
-            for (int i = 0; i < quantity; i++)
+            if (Authoring.isStartSpawning)
             {
-                Entity spawnedEntity = entityCommandBuffer.Instantiate(spawnerComponent._ballEntity);
-                entityCommandBuffer.SetComponent(spawnedEntity,
-                new BallComponent
+                EntityCommandBuffer entityCommandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.World.Unmanaged);
+                for (int i = 0; i < quantity; i++)
                 {
-                    _position = new float3(spawnerComponent._random.NextFloat(-150,150), spawnerComponent._random.NextFloat(-150,150), spawnerComponent._random.NextFloat(-150,150)),
-                    _acceleration = new float3(1, 2, 3),
-                    _direction = new float3(spawnerComponent._random.NextFloat(0,15f), spawnerComponent._random.NextFloat(0,15f), spawnerComponent._random.NextFloat(0,15f)),
-                });
+                    Entity spawnedEntity = entityCommandBuffer.Instantiate(spawnerComponent._ballEntity);
+                    entityCommandBuffer.SetComponent(spawnedEntity,
+                    new BallComponent
+                    {
+                        _position = spawnerComponent._position,
+                        _acceleration = new float3(spawnerComponent._random.NextFloat(-90, -90), spawnerComponent._random.NextFloat(-90, 90), spawnerComponent._random.NextFloat(-90, 90)),
+                        _direction = new float3(spawnerComponent._random.NextFloat(-90, 90f), spawnerComponent._random.NextFloat(-90, 90f), spawnerComponent._random.NextFloat(-90, 90f)),
+                    });
+                }
             }
         }
     }
