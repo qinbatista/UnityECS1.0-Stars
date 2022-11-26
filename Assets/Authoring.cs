@@ -27,7 +27,7 @@ public class Authoring : MonoBehaviour
         colorRedAngle += 0.7f * Time.deltaTime;
         colorGAngle += 0.9f * Time.deltaTime; ;
         colorBAngle += 1f * Time.deltaTime; ;
-        _material.SetColor("_EmissionColor", new Color(Mathf.Sin(colorRedAngle) + 0.2f, Mathf.Sin(colorGAngle) + 0.8f, Mathf.Sin(colorBAngle) + 0.1f) * 8);
+        _material.SetColor("_EmissionColor", new Color(Mathf.Sin(colorRedAngle) + 0.6f, Mathf.Sin(colorGAngle) + 0.8f, Mathf.Sin(colorBAngle) + 1f) * 8);
 
         if (Authoring.isStartSpawning && !useECS)
         {
