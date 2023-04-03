@@ -67,7 +67,7 @@ public struct AuthoringDataComponent : IComponentData
 IAspect is just for programmers to manage `Component`, for example, the previous example shows we had the Component which contains `position` and `speed`, what if we want to add `rotation` and `scale`? We can add them to the Component directly, but IAspect can help us expand the code easier, you can think of it as an `Interface` which helps us to manage code.
 ![Minion](aspect.png)
 
-####Code Example
+#### Code Example
 
 ```CSharp
 using System.Collections;
