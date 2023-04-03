@@ -10,15 +10,15 @@ This project is used to quickly how ECS works and how to do it. It is my persona
 
 ## Explanation
 #### Monobehavior
-It is difficult to hold over 10000 game objects in MonoBehavior. we **opened the shadow** for each game object. The performance will be significantly dropped. MonoBehavior works on the main thread, each object will be executed linearly time. Even though we use JobSystem to move game objects, the performance was influenced by the rendering.
+It is difficult to hold over 10000 game objects in MonoBehavior. we `opened the shadow` for each game object. The performance will be significantly dropped. MonoBehavior works on the main thread, each object will be executed linearly time. Even though we use JobSystem to move game objects, the performance was influenced by the rendering.
 ![Minion](monoobj.png)
 
 #### GPUInstance
-GPU instance(`Graphics.RenderMeshInstanced`) is very fast and it is even faster than ECS, but each object **will not receive shadows**. GPU instance might be good for some game objects which contain baked light and no need for real-time lighting on runtime.
+GPU instance(`Graphics.RenderMeshInstanced`) is very fast and it is even faster than ECS, but each object `will not receive shadows`. GPU instance might be good for some game objects which contain baked light and no need for real-time lighting on runtime.
 ![Minion](GPUInstance.png)
 
 #### ECS
-ECS has much better performance than MonoBehavior and each entity's rendering works the same as the Monobehavior game object. **Each entity is able to receive shadows**. There is no rendering difference between Entity and GameObjects from MonoBehavior.
+ECS has much better performance than MonoBehavior and each entity's rendering works the same as the Monobehavior game object. `Each entity is able to receive shadows`. There is no rendering difference between Entity and GameObjects from MonoBehavior.
 ![Minion](ecsobj.png)
 
 ## ECS Programming
@@ -100,7 +100,7 @@ public readonly partial struct ECSAspect : IAspect
 SystemBase is the ECS world's manager which can do update, modifications, queries, and all operations for the ECS world and for each entity.
 ![Minion](sytembase.png)
 
-####Code Example
+#### Code Example
 ```CSharp
 
 using System.Collections;
